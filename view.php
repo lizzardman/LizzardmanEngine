@@ -1,5 +1,9 @@
 <?php
 
+
+
+
+
 class View {
 
     public static function render($data, $template) {
@@ -13,7 +17,7 @@ class View {
             $_VIEW['flash'] = "";
         }
 
-        //Presents template
+                //Presents template
         include "template/".$template;
     }
 
