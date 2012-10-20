@@ -7,10 +7,10 @@ class View {
         $_VIEW = $data;
 
         if (isset($_SESSION['flash'])) {
-            $view['flash'] = $_SESSION['flash'];
+            $_VIEW['flash'] = $_SESSION['flash'];
             unset($_SESSION['flash']);
         } else {
-            $view['flash'] = "";
+            $_VIEW['flash'] = "";
         }
 
         //Presents template

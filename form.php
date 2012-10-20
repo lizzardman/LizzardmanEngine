@@ -58,8 +58,7 @@ class Form {
         if (is_array($errors)) {
             $this->errors = array_merge($this->errors, $errors);
         }
-        else
-            $this->errors[] = $errors;
+        else $this->errors[] = $errors;
     }
 
     //Check if forms has errors, Or any widgets contains errors. 
@@ -103,7 +102,6 @@ class Form {
 
     //Binds data of given array to form widgets.
     function bindData($post) {
- //       var_dump($post);
         foreach ($this->widgets as $widget) {
             if (array_key_exists($widget->getName(), $post))
                 $widget->setValue($post[$widget->getName()]);
@@ -165,14 +163,7 @@ class Form {
                     $widget->getView() .
                     "</tr>";
         }
-
-//        foreach ($widgets as $key => $value) {
-//            if(!$widget->getError()){
-//                $this->Formitem
-//            }
-//        }
-
-        return $widgets;
+       return $widgets;
     }
 
     //Renders whole form
@@ -246,16 +237,9 @@ class Formitem {
         if ($this->required && !($this->value)) {
             $this->error = "Oops! Please enter your " . strtolower($this->label);
         } else {
-            //Check is widget has regex and if it passes validation
-            //echo $this->regex,"|", $this->value;
-
             if ($this->regex!=null && !preg_match($this->regex, $this->value) && $this->value) {
                 $this->error = "Oops! Please enter a valid " . strtolower($this->label);
             }
-
-
-
-
         }
         
         
@@ -422,14 +406,6 @@ class FormErrors{
 
     protected function __construct() {
         $this->errors=array();
-        $this->errors['Ops_Account_NotFound']="Invalid username or password.";
-        $this->errors['Ops_Login_AlreadyExists']="Oops! This email is belongs to an existing account.";
-        $this->errors['Ops_RequestXmlInvalid']="Invalid data entered. Please check all fields.";
-        $this->errors['Comms_NationalNumber_Gender_DoNotMatch']="'Oops! This doesn't match your ID number";
-        $this->errors['Comms_Age_BelowMinuimumAge']="You need to be 18 years old to use Wonga.";
-        $this->errors['Ops_Password_MatchesLogin']="Oops! Your password cannot be the same as your email address.";
-        $this->errors['Comms_Pin_DoesNotMatch']="Please enter your 4 digit PIN exactly as it is in the sms sent to your mobile.";
-        $this->errors['Comms_NationalNumber_Invalid']="Oops! Your checkdigit is invalid.";
     }
 
     public function getUserError($error){
