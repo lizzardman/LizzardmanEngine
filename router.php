@@ -21,7 +21,7 @@ class Router {
         
         //User routes
         $this->addRequest("index", Role::Anonymus, 'Index?view');
-
+   
     }
 
     //Construct route
@@ -80,9 +80,6 @@ class Router {
             $this->redirect($route->getController(), $route->getAction(), $request);
         }
     }
-    
-
-
 }
 
 class Route {

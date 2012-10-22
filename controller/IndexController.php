@@ -5,7 +5,6 @@ require_once "formExtentions.php";
 require_once 'user.php';
 
 class IndexController extends Controller {
-
     public static function getInstance() {
 
         if (!self::$instance) {
@@ -16,13 +15,8 @@ class IndexController extends Controller {
     }
 
     public function viewAction($data=null) {
-        View::render(array('name'=>$data['name']), 'index.php');
+        View::render(array('name'=>$data['name']), 'index.phtml');
     }
-
-
-
-
-    
 }
 
 ?>
