@@ -65,7 +65,7 @@ class Router {
         
          
          for($i=0; $i<count($_pattern); $i++){
-             $_data[$_pattern[$i]]=$query[$i];
+             $_data[$_pattern[$i]]=$query[$i+1];
          }
 
          return $_data;
