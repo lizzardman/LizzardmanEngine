@@ -15,6 +15,7 @@ class IndexController extends Controller {
     }
 
     public function viewAction($data=null) {
+ 
         View::render(array('name'=>$data['name']), 'index');
     }
 }

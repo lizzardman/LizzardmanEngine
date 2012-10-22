@@ -25,7 +25,7 @@ require_once "view.php";
 session_set_cookie_params(60 * 30, "/");
 session_start();
 
-//var_dump($_REQUEST);
+
 Router::getInstance()->request($_REQUEST);
 
 

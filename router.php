@@ -20,15 +20,15 @@ class Router {
         $this->Routes = array();
         
         //User routes
-        $this->addRequest("index", Role::Anonymus, 'Index?view');
+        $this->addRequest("index", Role::Anonymus, 'Index?view', "action/name");
    
     }
 
     //Construct route
-    private function addRequest($action, $role, $route) {
+    private function addRequest($action, $role, $route, $pattern) {
         //Adding requst for ?action=xxx key
         //Depend on route and progress
-        $this->Routes[$action] = new Route($role, $route);
+        $this->Routes[$action] = new Route($role, $route, $pattern);
     }
 
 
@@ -58,26 +58,48 @@ class Router {
         return "index";
     }
     
+
+    private function mapRequest($query, $route){
+         $_data = array();
+         $_pattern = explode("/", $route->getPattern());
+        
+         
+         for($i=0; $i<count($_pattern); $i++){
+             $_data[$_pattern[$i]]=$query[$i];
+         }
+
+         return $_data;
+    }
+
+
+
     public function request($request) {
         //Geting current user
         $user = User::getInstance();
+       
+        $query =  explode("/", $_SERVER['PATH_INFO']);
+        $action = $query[1];
+
         //If correct request is entered and found in Route array
-        if (isset($request['action']) && isset($this->Routes[$request['action']])) {
-            $route = $this->Routes[$request['action']];
+        if ($action!=null && isset($this->Routes[$action])) {
+            $route = $this->Routes[$action];
 
             //Checks if user has enouth role and progress for evaluting requst
             if (($user->getRole() >= $route->getMinRole())) {
-                $this->redirect($route->getController(), $route->getAction(), $request);
+
+                //map $route to request
+                $data = $this->mapRequest($query, $route);
+                $this->redirect($route->getController(), $route->getAction(), array_merge($request, $data));
                 
             } else {
                 // TODO: Redirect to default request
                 $route = $this->Routes[$this->getDefaultRoute()];
-                $this->redirect($route->getController(), $route->getAction(), $request);
+                $this->redirect($route->getController(), $route->getAction(), array());
             }
         } else {
             //If requst if bad redirecting to default request
             $route = $this->Routes[$this->getDefaultRoute()];
-            $this->redirect($route->getController(), $route->getAction(), $request);
+            $this->redirect($route->getController(), $route->getAction(), array());
         }
     }
 }
@@ -87,16 +109,22 @@ class Route {
     private $action;
     private $controller;
     private $minRole;
+    private $pattern;
 
-
-    public function __construct($minRole, $route) {
+    public function __construct($minRole, $route, $pattern) {
         $this->minRole = $minRole;
         $contr = explode("?", $route);
         $this->controller = $contr[0];
         $this->action = $contr[1];
+        $this->pattern = $pattern;
      }
 
-    public function getcontroller() {
+
+    public function getPattern(){
+        return $this->pattern;
+    }
+
+    public function getController() {
         return $this->controller;
     }
 
