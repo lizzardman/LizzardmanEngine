@@ -18,7 +18,7 @@ class View {
         }
 
                 //Presents template
-        include "template/".$template;
+        include "template/".$template.".phtml";
     }
 
 }
