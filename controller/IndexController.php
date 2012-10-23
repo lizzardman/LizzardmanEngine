@@ -18,6 +18,11 @@ class IndexController extends Controller {
  
         View::render(array('name'=>$data['name']), 'index');
     }
+
+    public function otherViewAction($data=null) {
+ 
+        View::render(array('name'=>$data['name'], 'surname'=>$data['surname']), 'otherIndex');
+    }
 }
 
 ?>

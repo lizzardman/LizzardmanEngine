@@ -21,7 +21,7 @@ class Router {
         
         //User routes
         $this->addRequest("index", Role::Anonymus, 'Index?view', "action/name");
-   
+        $this->addRequest("index2", Role::Anonymus, 'Index?otherView', "action/name/surname");
     }
 
     //Construct route
@@ -58,19 +58,14 @@ class Router {
         return "index";
     }
     
-
     private function mapRequest($query, $route){
          $_data = array();
          $_pattern = explode("/", $route->getPattern());
-        
-         
          for($i=0; $i<count($_pattern); $i++){
              $_data[$_pattern[$i]]=$query[$i+1];
          }
-
          return $_data;
     }
-
 
 
     public function request($request) {
