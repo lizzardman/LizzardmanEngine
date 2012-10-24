@@ -1,18 +1,15 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////////
-//  Main CMS module
+//  Main module
 //
 //  @package LizzardmanEngine 
 //  @authors Artem Zelinskyi [lizzardman@], ...
 //  @copyright 2012 
 //  @version $Id$
 //  @since 0.0.0
-//  @license http://opensource.org/licenses/gpl-license.php GNU Public License
-//  LizzardmanEngine is free software. This version may have been modified pursuant
-//  to the GNU General Public License, and as distributed it includes or
-//  is derivative of works licensed under the GNU General Public License or
-//  other free or open source software licenses.
-//  See COPYING.txt for copyright notices and details.
+//  @license "THE BEER-WARE LICENSE"
+//  
+//  See license.txt for copyright notices and details.
 /////////////////////////////////////////////////////////////////////////////////////
 
     
